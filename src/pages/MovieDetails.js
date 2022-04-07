@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-const API = `7f43d469e4b124bca9e8aa24fe508eaf`;
+import tmdbApi from "../app/tmdbApi";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState();
@@ -10,15 +9,8 @@ const MovieDetails = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API}`
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setMovie(data);
-          console.log(data);
-        }
+        const response = await tmdbApi.getMovieDetails(movieId);
+        setMovie(response);
       } catch (error) {
         console.log(error);
       }
