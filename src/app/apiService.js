@@ -7,11 +7,12 @@ const apiService = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  params: {},
   paramsSerializer: (params) =>
     queryString.stringify({ ...params, api_key: apiConfig.apiKey }),
 });
 
-apiService.interceptors.request.use(async (config) => {
+apiService.interceptors.request.use((config) => {
   console.log(config);
   return config;
 });
