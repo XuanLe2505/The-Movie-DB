@@ -7,9 +7,6 @@ import { useForm } from "react-hook-form";
 import SortContextProvider from "./contexts/SortContext";
 
 const defaultValues = {
-  gender: [],
-  category: "All",
-  priceRange: "",
   sortBy: "Title (A-Z)",
   searchQuery: "",
 };
