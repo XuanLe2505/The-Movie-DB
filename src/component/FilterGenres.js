@@ -1,45 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Context from "../context/Context";
 
 const API = `7f43d469e4b124bca9e8aa24fe508eaf`;
 
-const RenderListData = ({ id }) => {
-  const [data, setData] = useState();
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${API}&with_genres=${id}`
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setData(data.results);
-          console.log(data.results);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getData();
-  }, []);
-
-  return (
-    <>
-      {/* {data.map((movie) => (
-        <div>
-          <p>title: {movie.title}</p>
-          <p>genre id: {movie.genre_ids.map((id) => `${id} ,`)} </p>
-          <br />
-        </div>
-      ))} */}
-    </>
-  );
-};
-
 const FilterGenres = () => {
   const [genres, setGenres] = useState();
-  const [idFilter, setIdFilter] = useState("");
-
+  const [idFilter, setIdFilter] = useState();
+  console.log(`render`);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -57,7 +24,7 @@ const FilterGenres = () => {
     getData();
   }, []);
 
-  const handleFilter = ({ id }) => {
+  const handleFilter = (id) => {
     console.log(`filter`, id);
     // const filterData = data.filter((movie) => movie.genre_ids.includes(id));
     // console.log("filter :>> ", filterData);
@@ -66,13 +33,12 @@ const FilterGenres = () => {
   };
   return (
     <div>
-      {genres &&
-        genres.map(({ name, id }) => (
-          <button key={id} onClick={(e) => handleFilter({ id })}>
-            {name}
-          </button>
-        ))}
-      {idFilter && <RenderListData id={idFilter} />}
+      {genres?.map(({ name, id }) => (
+        <button key={id} onClick={() => handleFilter(id)}>
+          {name}
+        </button>
+      ))}
+      {idFilter && <Context idFilter={idFilter} />}
     </div>
   );
 };
