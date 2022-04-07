@@ -4,6 +4,7 @@ import MovieSearch from "./components/MovieSearch";
 import MovieSort from "./components/MovieSort";
 import SearchContextProvider from "./contexts/SearchContext";
 import { useForm } from "react-hook-form";
+import SortContextProvider from "./contexts/SortContext";
 
 const defaultValues = {
   gender: [],
@@ -20,10 +21,12 @@ function App() {
       <h1>Movie Search</h1>
       <SearchContextProvider>
         <MovieSearch />
+      </SearchContextProvider>
+      <SortContextProvider>
         <FormProvider methods={methods}>
           <MovieSort />
         </FormProvider>
-      </SearchContextProvider>
+      </SortContextProvider>
     </div>
   );
 }
