@@ -1,36 +1,44 @@
 import React, { useState, createContext, useEffect } from "react";
-import jobs from "../data.json";
 
+let movies = [];
 const search = {
-  arr: jobs,
+  arr: movies,
   keyword: "",
   change: () => {},
 };
+
+const searchURL =
+  "https://api.themoviedb.org/3/search/multi?api_key=7f43d469e4b124bca9e8aa24fe508eaf";
+
 export const SearchContext = createContext(search);
 
 function SearchContextProvider({ children }) {
-  const [jobsSearch, setJobsSearch] = useState(jobs);
+  const [moviesSearch, setMoviesSearch] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const searchJob = (jobs, keyword) => {
-    return jobs.filter((job) => {
-      return (
-        job.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
-        job.city.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
-        job.description.toLowerCase().indexOf(keyword.toLowerCase()) !== -1 ||
-        job.skills.join().toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-      );
-    });
+
+  const movieBySearch = async (searchInput) => {
+    try {
+      const url = `${searchURL}&query=${searchInput}`;
+      const res = await fetch(url);
+      const movies = await res.json();
+      console.log("data", movies);
+      return movies;
+    } catch (err) {
+      console.log("err", err);
+    }
   };
-  useEffect(() => {
-    setJobsSearch(searchJob(jobs, searchInput));
-  }, [searchInput]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMoviesSearch(await movieBySearch(searchInput));
+  };
 
   return (
     <SearchContext.Provider
       value={{
-        arr: jobsSearch,
+        arr: moviesSearch,
         keyword: searchInput,
         change: setSearchInput,
+        submit: handleSubmit,
       }}
     >
       {children}

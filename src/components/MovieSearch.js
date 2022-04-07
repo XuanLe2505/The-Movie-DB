@@ -1,22 +1,27 @@
-import { InputAdornment } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
-import { FTextField } from "./form";
+import React, { useState } from "react";
+import useSearch from "../hooks/useSearch";
+import { Button, Stack, TextField } from "@mui/material";
 
 function MovieSearch() {
+  let {
+    keyword: searchInput,
+    change: setSearchInput,
+    submit: onSubmit,
+  } = useSearch();
+
   return (
-    <FTextField
-      name="searchQuery"
-      sx={{ width: 300 }}
-      size="small"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-      }}
-    />
+    <Stack direction="row" spacing={2}>
+      <form onSubmit={onSubmit}>
+        <TextField
+          name="searchQuery"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        <Button type="submit" variant="contained">
+          Search
+        </Button>
+      </form>
+    </Stack>
   );
 }
 
