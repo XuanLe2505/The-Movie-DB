@@ -1,8 +1,43 @@
 .container {
-    display: flex;
+  display: flex;
 }
-.image{
-    height: 50vh;
-    margin: 10px;
+.image {
+  height: 50vh;
+  margin: 10px;
+}
 
+.App {
+  height: 100%;
+  width: 100%;
+}
+
+.carousel {
+  align-items: flex-end;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: inset 20px 20px 100px 40px rgb(1 1 1 / 70%);
+  display: flex;
+  height: calc(100vh - 20rem);
+  justify-content: unset;
+  position: relative;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1em;
+  overflow: scroll;
+}
+
+.section-title {
+  letter-spacing: 0.1em;
+  margin: 1em 0;
+}
+
+.movie-card {
+  width: 12em;
+  border-radius: 2em;
+  max-width: 100%;
 }

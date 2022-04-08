@@ -84,6 +84,16 @@ const tmdbApi = {
       throw error;
     }
   },
+  getMovieTopRated: async () => {
+    const url = `movie/top_rated`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
 };
 
 export default tmdbApi;

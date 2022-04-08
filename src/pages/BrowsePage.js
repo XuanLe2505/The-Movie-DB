@@ -33,7 +33,7 @@ function BrowsePage() {
 
   return (
     <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
-      <FilterGenres/>
+      <FilterGenres />
       <Stack sx={{ flexGrow: 1 }}>
         <Box sx={{ position: "relative", height: 1 }}>
           {loading ? (
