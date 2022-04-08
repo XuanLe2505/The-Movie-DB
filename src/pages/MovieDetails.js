@@ -2,6 +2,7 @@ import { bgcolor } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import tmdbApi from "../app/tmdbApi";
+import LoadingScreen from "../components/LoadingScreen";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState();
@@ -18,7 +19,7 @@ const MovieDetails = () => {
     };
     getData();
   }, []);
-  if (!movie) return <p>Loading......</p>;
+  if (!movie) return <LoadingScreen />;
 
   const imgBg = `https://image.tmdb.org/t/p/w500${movie[`backdrop_path`]}`;
   return (
