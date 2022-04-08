@@ -8,18 +8,17 @@ import apiConfig from "../app/apiConfig";
 
 function ProductCard({ movie }) {
   const backgroundImage = apiConfig.originalImage(movie.backdrop_path);
-  movie.backgroundImage = backgroundImage;
+  // movie.backgroundImage = backgroundImage;
   const posterImage = apiConfig.w500Image(movie.poster_path);
-  movie.posterImage = posterImage;
+  // movie.posterImage = posterImage;
   return (
     <Card>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image={
-            movie.backgroundImage ? movie.backgroundImage : movie.posterImage
-          }
+          width="210"
+          image={movie.backdrop_path ? backgroundImage : posterImage}
           alt={movie.title}
         />
         <CardContent>
