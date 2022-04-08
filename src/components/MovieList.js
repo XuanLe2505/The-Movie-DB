@@ -5,7 +5,6 @@ import MovieCard from "./MovieCard";
 
 function MovieList({ movies, setCurrentPage, totalPage, currentPage }) {
   const handleChange = (event, value) => {
-    console.log(value);
     setCurrentPage(value);
   };
   return (
@@ -18,7 +17,12 @@ function MovieList({ movies, setCurrentPage, totalPage, currentPage }) {
         ))}
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "center", mt: 3, mb: 3 }}>
-        <Pagination count={totalPage} page={currentPage} onChange={handleChange} color="primary" />
+        <Pagination
+          count={totalPage}
+          page={currentPage}
+          onChange={handleChange}
+          color="primary"
+        />
       </Box>
     </>
   );
