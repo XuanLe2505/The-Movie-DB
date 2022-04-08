@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./App.css";
 import { FormProvider } from "./components/form";
 import MovieSearch from "./components/MovieSearch";
@@ -10,10 +11,16 @@ const defaultValues = {
   sortBy: "Title (A-Z)",
   searchQuery: "",
 };
+=======
+import React from "react";
+import Router from "./routes";
+import { BrowserRouter } from "react-router-dom";
+>>>>>>> main
 
 function App() {
   const methods = useForm({ defaultValues });
   return (
+<<<<<<< HEAD
     <div className="App">
       <h1>Movie Search</h1>
       <SearchContextProvider>
@@ -25,6 +32,11 @@ function App() {
         </FormProvider>
       </SortContextProvider>
     </div>
+=======
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+>>>>>>> main
   );
 }
 
