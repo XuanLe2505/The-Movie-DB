@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import SearchContextProvider from "../contexts/SearchContext";
 import MovieSearch from "../components/MovieSearch";
-import SortContextProvider from "../contexts/SortContext";
-import FormProvider from "../components/form/FormProvider";
-import MovieSort from "../components/MovieSort";
+// import SortContextProvider from "../contexts/SortContext";
+// import FormProvider from "../components/form/FormProvider";
+// import MovieSort from "../components/MovieSort";
 import { useForm } from "react-hook-form";
 import tmdbApi from "../app/tmdbApi";
 import { Alert, Box, Container, Stack } from "@mui/material";
-import MovieList from "../components/MovieList";
+// import MovieList from "../components/MovieList";
 import LoadingScreen from "../components/LoadingScreen";
 import MovieCarousel from "../components/MovieCarousel";
 
@@ -16,7 +16,7 @@ const defaultValues = {
   searchQuery: "",
 };
 function HomePages() {
-  const methods = useForm({ defaultValues });
+  // const methods = useForm({ defaultValues });
   const [moviesPop, setMoviesPop] = useState([]);
   const [moviesNPlaying, setMoviesNPlaying] = useState([]);
   const [moviesUC, setMoviesUC] = useState([]);
@@ -83,12 +83,7 @@ function HomePages() {
         </FormProvider>
       </SortContextProvider> */}
 
-        <Box
-          sx={{ position: "relative", height: 1 }}
-          style={{
-            overflow: "scroll",
-          }}
-        >
+        <Box sx={{ position: "relative", height: 1 }}>
           Popular
           {loading ? (
             <LoadingScreen />
@@ -103,12 +98,7 @@ function HomePages() {
           )}
         </Box>
 
-        <Box
-          sx={{ position: "relative", height: 1 }}
-          style={{
-            overflow: "scroll",
-          }}
-        >
+        <Box sx={{ position: "relative", height: 1 }}>
           Now Playing
           {loading ? (
             <LoadingScreen />
@@ -123,12 +113,7 @@ function HomePages() {
           )}
         </Box>
 
-        <Box
-          sx={{ position: "relative", height: 1 }}
-          style={{
-            overflow: "scroll",
-          }}
-        >
+        <Box sx={{ position: "relative", height: 1 }}>
           UpComing
           {loading ? (
             <LoadingScreen />
