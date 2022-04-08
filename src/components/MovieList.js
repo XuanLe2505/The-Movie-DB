@@ -3,9 +3,10 @@ import { Box } from "@mui/system";
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({ movies, setPage }) {
+function MovieList({ movies, setCurrentPage, totalPage, currentPage }) {
   const handleChange = (event, value) => {
-    setPage(value);
+    console.log(value);
+    setCurrentPage(value);
   };
   return (
     <>
@@ -17,7 +18,7 @@ function MovieList({ movies, setPage }) {
         ))}
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "center", mt: 3, mb: 3 }}>
-        <Pagination  onChange={handleChange} />
+        <Pagination count={totalPage} page={currentPage} onChange={handleChange} color="primary" />
       </Box>
     </>
   );
