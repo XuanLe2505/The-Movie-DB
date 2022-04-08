@@ -1,3 +1,4 @@
+import { bgcolor } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import tmdbApi from "../app/tmdbApi";
@@ -19,27 +20,41 @@ const MovieDetails = () => {
   }, []);
   if (!movie) return <p>Loading......</p>;
 
+  const imgBg = `https://image.tmdb.org/t/p/w500${movie[`backdrop_path`]}`;
   return (
-    <div className="container">
-      <div className="image">
+    <div className="page" style={{ backgroundImage: `url(${imgBg})` }}>
+      <div className="container">
         <img
+          className="image"
           src={`https://image.tmdb.org/t/p/w500${movie[`poster_path`]}`}
           alt="img"
         />
-      </div>
-      <div>
-        <h3>{movie.title}</h3>
-        <p>{movie[`release_date`]}</p>
-        <p>Description: {movie.overview}</p>
-        <p>
-          Genres:{" "}
-          {movie.genres.map(({ name, id }) => (
-            <span style={{ marginRight: 5 }} key={id}>
-              {name}
-            </span>
-          ))}
-        </p>
-        <p>Vote average: {movie[`vote_average`]}</p>
+
+        <div style={{ marginRight: 30 }}>
+          <h1>{movie.title}</h1>
+          <p>{movie[`release_date`]}</p>
+          <p>
+            <span className="strong-text">Description</span>: {movie.overview}
+          </p>
+          <p>
+            <span className="strong-text">Genres</span>:
+            {movie.genres.map(({ name, id }) => (
+              <span style={{ marginLeft: 5 }} key={id}>
+                <button
+                  disabled="disabled"
+                  style={{ color: "black", backgroundColor: "bisque" }}
+                >
+                  {" "}
+                  {name}
+                </button>
+              </span>
+            ))}
+          </p>
+          <p>
+            <span className="strong-text">Vote average</span>:{" "}
+            {movie[`vote_average`]}
+          </p>
+        </div>
       </div>
     </div>
   );

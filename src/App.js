@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import FilterGenres from "./component/FilterGenres";
+import FilterGenres from "./components/FilterGenres";
 import MovieDetails from "./pages/MovieDetails";
 
 function App() {
