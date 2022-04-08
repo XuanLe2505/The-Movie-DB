@@ -31,6 +31,26 @@ const tmdbApi = {
       throw error;
     }
   },
+  getMovieSearch: async (searchInput) => {
+    const url = `search/multi/${searchInput}`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+  getMovieSort: async (sortInput) => {
+    const url = `discover/movie/${sortInput}`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
 };
 
 export default tmdbApi;

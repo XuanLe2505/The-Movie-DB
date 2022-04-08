@@ -29,7 +29,10 @@ function SortContextProvider({ children }) {
   //   }
   // };
   useEffect(() => {
-    setMoviesSort(tmdbApi.getMovieSort(sortInput));
+    async function getData() {
+      return setMoviesSort(await tmdbApi.getMovieSort(sortInput));
+    }
+    getData();
   }, [sortInput]);
 
   return (
