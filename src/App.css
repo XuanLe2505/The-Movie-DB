@@ -1,3 +1,10 @@
+body {
+  background-color: rgb(41, 41, 41);
+  color: aliceblue;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
 .container {
   display: flex;
 }
@@ -28,7 +35,7 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 1em;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 
 .section-title {

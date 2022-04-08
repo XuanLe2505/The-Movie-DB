@@ -5,8 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import apiConfig from "../app/apiConfig";
+import { Link, useLocation } from "react-router-dom";
 
 const MovieCarousel = ({ movies }) => {
+  const location = useLocation();
   const [movieIndex, setMovieIndex] = useState(0);
   const backgroundImage = apiConfig.originalImage(
     movies[movieIndex]?.backdrop_path
@@ -49,6 +51,14 @@ const MovieCarousel = ({ movies }) => {
             disabled={movieIndex === movies.length - 1}
           >
             Next
+          </Button>
+          <Button>
+            <Link
+              to={`/movie/${movies[movieIndex]?.id}`}
+              state={{ backgroundLocation: location }}
+            >
+              See More
+            </Link>
           </Button>
         </CardActions>
       </Card>

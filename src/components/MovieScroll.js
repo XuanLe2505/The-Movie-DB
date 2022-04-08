@@ -11,11 +11,12 @@ function MovieScroll({ movies }) {
           display: "flex",
           flexDirection: "row",
           flexWrap: "nowrap",
-          overflow: "scroll",
+          overflowX: "scroll",
+          gap: "1em",
         }}
       >
         {movies.map((movie) => (
-          <Grid item key={movie.id} xs={6} md={4} lg={3} sx={{ mr: 2 }}>
+          <Grid item key={movie.id} xs={6} md={4} lg={3}>
             <MovieCard movie={movie} className="movie-card" />
           </Grid>
         ))}
