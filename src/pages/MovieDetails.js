@@ -1,63 +1,71 @@
-import { bgcolor } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import tmdbApi from "../app/tmdbApi";
 import LoadingScreen from "../components/LoadingScreen";
+import MovieTrailer from "../components/MovieTrailer";
+
+import "./MovieDetails.css";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState();
   const { movieId } = useParams();
 
   useEffect(() => {
-    const getData = async () => {
+    const getMoveDetails = async () => {
       try {
         const response = await tmdbApi.getMovieDetails(movieId);
         setMovie(response);
+
+        console.log("response", response);
       } catch (error) {
         console.log(error);
       }
     };
-    getData();
+    getMoveDetails();
   }, []);
+
   if (!movie) return <LoadingScreen />;
 
-  const imgBg = `https://image.tmdb.org/t/p/w500${movie[`backdrop_path`]}`;
-  return (
-    <div className="page" style={{ backgroundImage: `url(${imgBg})` }}>
-      <div className="container">
-        <img
-          className="image"
-          src={`https://image.tmdb.org/t/p/w500${movie[`poster_path`]}`}
-          alt="img"
-        />
+  const movieImg = `https://image.tmdb.org/t/p/original${
+    movie.backdrop_path || movie.poster_path
+  }`;
 
-        <div style={{ marginRight: 30 }}>
-          <h1>{movie.title}</h1>
-          <p>{movie[`release_date`]}</p>
-          <p>
-            <span className="strong-text">Description</span>: {movie.overview}
-          </p>
-          <p>
-            <span className="strong-text">Genres</span>:
-            {movie.genres.map(({ name, id }) => (
-              <span style={{ marginLeft: 5 }} key={id}>
-                <button
-                  disabled="disabled"
-                  style={{ color: "black", backgroundColor: "bisque" }}
+  return (
+    <>
+      <div
+        className="banner"
+        style={{
+          backgroundImage: `url(${movieImg})`,
+        }}
+      />
+      <div className="movie-page">
+        <div className="movie-details">
+          <div className="movie-poster">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt="img"
+            />
+          </div>
+
+          <div className="movie-content">
+            <h1 className="title">{movie.title || movie.name}</h1>
+            <div className="genres">
+              {movie.genres.map(({ name, id }) => (
+                <span
+                  key={id}
+                  className="genres-item"
+                  style={{ marginRight: "1rem" }}
                 >
-                  {" "}
                   {name}
-                </button>
-              </span>
-            ))}
-          </p>
-          <p>
-            <span className="strong-text">Vote average</span>:{" "}
-            {movie[`vote_average`]}
-          </p>
+                </span>
+              ))}
+            </div>
+            <p className="overview">{movie.overview}</p>
+          </div>
         </div>
+        <MovieTrailer />
       </div>
-    </div>
+    </>
   );
 };
 
