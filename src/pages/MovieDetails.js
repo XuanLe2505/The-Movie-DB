@@ -11,7 +11,6 @@ const MovieDetails = () => {
     const getData = async () => {
       try {
         const response = await tmdbApi.getMovieDetails(movieId);
-        console.log(response);
         setMovie(response);
       } catch (error) {
         console.log(error);
