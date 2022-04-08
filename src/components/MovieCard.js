@@ -14,12 +14,7 @@ function ProductCard({ movie }) {
   movie.posterImage = posterImage;
   const navigate = useNavigate();
   return (
-    <Card
-      onClick={() => {
-        console.log(`card`);
-        navigate(`/movie/${movie.id}`);
-      }}
-    >
+    <Card onClick={() => navigate(`/movie/${movie.id}`)}>
       <CardActionArea>
         <CardMedia
           component="img"
