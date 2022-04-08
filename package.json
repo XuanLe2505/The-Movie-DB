@@ -7,16 +7,12 @@
     "@emotion/styled": "^11.8.1",
     "@hookform/resolvers": "^2.8.8",
     "@mui/icons-material": "^5.6.0",
-<<<<<<< HEAD
     "@mui/lab": "^5.0.0-alpha.76",
-=======
->>>>>>> main
     "@mui/material": "^5.6.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
-<<<<<<< HEAD
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
     "react": "^18.0.0",
@@ -26,14 +22,12 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "rehype-raw": "^6.1.1",
-=======
     "query-string": "^7.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.29.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
->>>>>>> main
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
