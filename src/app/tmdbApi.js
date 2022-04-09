@@ -61,6 +61,49 @@ const tmdbApi = {
       throw error;
     }
   },
+
+  getMoviePopular: async () => {
+    const url = `movie/popular`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+
+  getMovieNPlaying: async () => {
+    const url = `movie/now_playing`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+
+  getMovieUpComing: async () => {
+    const url = `movie/upcoming`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+  getMovieTopRated: async () => {
+    const url = `movie/top_rated`;
+    try {
+      const data = await apiService.get(url);
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
 };
 
 export default tmdbApi;
