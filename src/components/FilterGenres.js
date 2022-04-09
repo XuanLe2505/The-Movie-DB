@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import tmdbApi from "../app/tmdbApi";
-import Context from "../context/Context";
 
-const FilterGenres = () => {
+const FilterGenres = ({ getMoviesList, setCurrentPage }) => {
   const [genres, setGenres] = useState();
-  const [idFilter, setIdFilter] = useState();
   useEffect(() => {
     const getData = async () => {
       try {
@@ -20,11 +18,15 @@ const FilterGenres = () => {
   return (
     <div>
       {genres?.map(({ name, id }) => (
-        <button key={id} onClick={() => setIdFilter(id)}>
+        <button
+          key={id}
+          onClick={async () => {
+            getMoviesList({ with_genres: id, page: 1 });
+          }}
+        >
           {name}
         </button>
       ))}
-      {idFilter && <Context idFilter={idFilter} />}
     </div>
   );
 };

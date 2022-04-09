@@ -21,6 +21,16 @@ const tmdbApi = {
       throw error;
     }
   },
+  getMovieVideos: async (movieId, params) => {
+    const url = `movie/${movieId}/videos`;
+    try {
+      const data = await apiService.get(url, { params });
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
   getMovieGenres: async () => {
     const url = `genre/movie/list`;
     try {
