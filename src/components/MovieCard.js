@@ -6,20 +6,21 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import apiConfig from "../app/apiConfig";
 import { useNavigate } from "react-router-dom";
+import { ClassNames } from "@emotion/react";
 
 function ProductCard({ movie }) {
   const backgroundImage = apiConfig.originalImage(movie.backdrop_path);
   // movie.backgroundImage = backgroundImage;
   const posterImage = apiConfig.w500Image(movie.poster_path);
-  movie.posterImage = posterImage;
+  // movie.posterImage = posterImage;
   const navigate = useNavigate();
   return (
-    <Card onClick={() => navigate(`/movie/${movie.id}`)}>
+    <Card className="movie-card" onClick={() => navigate(`/movie/${movie.id}`)}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          width="210"
+          className="card-media"
           image={movie.backdrop_path ? backgroundImage : posterImage}
           alt={movie.title}
         />

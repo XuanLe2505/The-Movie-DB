@@ -1,6 +1,7 @@
 import React from "react";
 import { FSelect } from "./form";
-import useSort from "../hooks/useSort";
+import useData from "../hooks/useData";
+import "../App.css";
 
 const SORT_OPTIONS = [
   { value: "popularity.desc", label: "Popularity Descending" },
@@ -13,7 +14,14 @@ const SORT_OPTIONS = [
   { value: "title.desc", label: "Title (Z-A)" },
 ];
 function MovieSort() {
-  let { keyword: sortInput, change: setSortInput } = useSort();
+  let { sort: sortInput, setSort: setSortInput } = useData();
+  const dropdownMenuProps = {
+    menuStyle: {
+      border: "1px solid black",
+      borderRadius: "5%",
+      backgroundColor: "lightgrey",
+    },
+  };
   return (
     <div>
       <FSelect
@@ -22,6 +30,7 @@ function MovieSort() {
         sx={{ width: 300 }}
         value={sortInput}
         onChange={(e) => setSortInput(e.target.value)}
+        dropDownMenuProps={dropdownMenuProps}
       >
         {SORT_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>
