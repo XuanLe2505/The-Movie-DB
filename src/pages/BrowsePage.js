@@ -5,6 +5,8 @@ import LoadingScreen from "../components/LoadingScreen";
 import tmdbApi from "../app/tmdbApi";
 import FilterGenres from "../components/FilterGenres";
 
+const MAX_PAGES = 500;
+
 function BrowsePage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,48 +14,62 @@ function BrowsePage() {
   const [currentPage, setCurrentPage] = useState();
   const [totalPage, setTotalPage] = useState();
 
-  useEffect(() => {
-    const getMoviesList = async () => {
-      setLoading(true);
-      const params = {
-        page: currentPage,
-      };
-      try {
-        const response = await tmdbApi.getMovies(params);
-        setMovies(response.results);
-        setTotalPage(response.total_pages);
-        setError("");
-      } catch (error) {
-        setError(error.message);
-      }
-      setLoading(false);
+  console.log("loading", loading);
+
+  const getMoviesList = async (params = {}) => {
+    setLoading(true);
+
+    const fetchParams = {
+      page: currentPage,
+      ...params,
     };
+
+    try {
+      const response = await tmdbApi.getMovies(fetchParams);
+      setMovies(response.results);
+      setTotalPage(
+        response.total_pages > MAX_PAGES ? MAX_PAGES : response.total_pages
+      );
+
+      if (params.page && currentPage !== params.page) {
+        setCurrentPage(params.page);
+      }
+
+      setError("");
+    } catch (error) {
+      setError(error.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
     getMoviesList();
   }, [currentPage]);
 
   return (
-    <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
-      <FilterGenres/>
-      <Stack sx={{ flexGrow: 1 }}>
-        <Box sx={{ position: "relative", height: 1 }}>
-          {loading ? (
-            <LoadingScreen />
-          ) : (
-            <>
-              {error ? (
-                <Alert severity="error">{error}</Alert>
-              ) : (
-                <MovieList
-                  movies={movies}
-                  setCurrentPage={setCurrentPage}
-                  totalPage={totalPage}
-                  currentPage={currentPage}
-                />
-              )}
-            </>
-          )}
-        </Box>
-      </Stack>
+    <Container sx={{ height: "100vh", mt: 3 }}>
+      <FilterGenres
+        getMoviesList={getMoviesList}
+        setCurrentPage={setCurrentPage}
+      />
+      <Box sx={{ position: "relative", height: 1, width: "100%" }}>
+        {loading ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            {error ? (
+              <Alert severity="error">{error}</Alert>
+            ) : (
+              <MovieList
+                movies={movies}
+                setCurrentPage={setCurrentPage}
+                totalPage={totalPage}
+                currentPage={currentPage}
+              />
+            )}
+          </>
+        )}
+      </Box>
     </Container>
   );
 }
