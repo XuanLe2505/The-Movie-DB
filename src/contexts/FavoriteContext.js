@@ -15,7 +15,6 @@ export const FavoriteContext = createContext(contextdata);
 
 function FavoriteContextProvider({ children }) {
   const [idList, setIdList] = useState({});
-  console.log("idList", idList);
   const isLogin = useAuth().isAuthenticated;
   const userName = useAuth().user?.username;
 

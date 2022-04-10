@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import "./MovieDetails.css";
-import { Button } from "@mui/material";
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState();

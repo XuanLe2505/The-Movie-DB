@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import apiConfig from "../app/apiConfig";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useFavorite from "../hooks/useFavorite";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";

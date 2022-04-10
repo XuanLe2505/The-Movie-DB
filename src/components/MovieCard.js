@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, IconButton } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import apiConfig from "../app/apiConfig";
 import { useNavigate } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -22,7 +22,6 @@ function ProductCard({ movie }) {
   const navigate = useNavigate();
   const isLogin = useAuth();
   const idList = useFavorite().idList;
-  console.log("idList", idList);
   const setIdList = useFavorite().setIdList;
   const location = useLocation();
 
