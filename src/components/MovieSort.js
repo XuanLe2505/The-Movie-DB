@@ -15,29 +15,21 @@ const SORT_OPTIONS = [
 ];
 function MovieSort() {
   let { sort: sortInput, setSort: setSortInput } = useData();
-  const dropdownMenuProps = {
-    menuStyle: {
-      border: "1px solid black",
-      borderRadius: "5%",
-      backgroundColor: "lightgrey",
-    },
-  };
+
   return (
     <div>
-      <FSelect
+      <select
         name="sortBy"
-        size="small"
-        sx={{ width: 300 }}
         value={sortInput}
         onChange={(e) => setSortInput(e.target.value)}
-        dropDownMenuProps={dropdownMenuProps}
+        className="sort-input"
       >
         {SORT_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
-      </FSelect>
+      </select>
     </div>
   );
 }

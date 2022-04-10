@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import useFavorite from "../hooks/useFavorite";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import noImage from "../no-image.png";
 
 const MovieCarousel = ({ movies }) => {
   let navigate = useNavigate();
@@ -34,7 +35,11 @@ const MovieCarousel = ({ movies }) => {
             component="img"
             width="100%"
             image={
-              movies[movieIndex].backdrop_path ? backgroundImage : posterImage
+              movies[movieIndex].backdrop_path
+                ? backgroundImage
+                : movies[movieIndex].poster_path
+                ? posterImage
+                : noImage
             }
             alt={movies[movieIndex]?.title}
           />

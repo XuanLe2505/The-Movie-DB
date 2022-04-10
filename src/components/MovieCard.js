@@ -11,6 +11,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useAuth from "../hooks/useAuth";
 import useFavorite from "../hooks/useFavorite";
 import { useLocation } from "react-router-dom";
+import noImage from "../no-image.png";
 
 import { Box } from "@mui/system";
 
@@ -32,7 +33,13 @@ function ProductCard({ movie }) {
           component="img"
           height="140"
           className="card-media"
-          image={movie.backdrop_path ? backgroundImage : posterImage}
+          image={
+            movie.poster_path
+              ? posterImage
+              : movie.backdrop_path
+              ? backgroundImage
+              : noImage
+          }
           alt={movie.title}
         />
       </CardActionArea>
@@ -42,6 +49,7 @@ function ProductCard({ movie }) {
           alignItems="center"
           justifyContent="space-between"
           flexDirection="row"
+          width="100%"
         >
           <Typography gutterBottom variant="body" component="div">
             {movie.title}
