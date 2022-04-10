@@ -61,6 +61,7 @@ const MovieDetails = () => {
             <span>
               {idList[movie.id] ? (
                 <button
+                  className="favorite-btn"
                   onClick={() => setIdList({ ...idList, [movie.id]: false })}
                 >
                   {" "}
@@ -68,6 +69,7 @@ const MovieDetails = () => {
                 </button>
               ) : (
                 <button
+                  className="favorite-btn"
                   onClick={
                     isLogin.isAuthenticated
                       ? () =>

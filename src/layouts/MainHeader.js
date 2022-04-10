@@ -100,10 +100,7 @@ const MainHeader = () => {
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem key="browser" onClick={handleBrowser}>
-                <Link to={`/browser`}>
-                  {" "}
-                  <Typography textAlign="center">Browser</Typography>
-                </Link>
+                <Typography textAlign="center">Browser</Typography>
               </MenuItem>
             </Menu>
           </Box>
