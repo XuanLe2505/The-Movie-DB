@@ -12,13 +12,15 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useLocation } from "react-router-dom";
-
-const settings = ["Profile", "Account", "Farvorite", "Logout"];
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const MainHeader = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const location = useLocation();
+  const isLogin = useAuth();
+  let navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -30,11 +32,28 @@ const MainHeader = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const handleHome = () => {
+    setAnchorElNav(null);
+    navigate("/");
+  };
+
+  const handleBrowser = () => {
+    setAnchorElNav(null);
+    navigate("/browser");
+  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleLogOut = () => {
+    setAnchorElUser(null);
+    isLogin.logout();
+  };
 
+  const handleFavorite = () => {
+    setAnchorElUser(null);
+    navigate(`favorite`);
+  };
   return (
     <AppBar position="static" sx={{ bgcolor: "black", color: "aliceblue" }}>
       <Container maxWidth="xl">
@@ -77,22 +96,13 @@ const MainHeader = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem key="Home" onClick={handleCloseNavMenu}>
-                <Link to={`/`}>
-                  {" "}
-                  <Typography textAlign="center">Home</Typography>
-                </Link>
+              <MenuItem key="home" onClick={handleHome}>
+                <Typography textAlign="center">Home</Typography>
               </MenuItem>
-              <MenuItem key="browser" onClick={handleCloseNavMenu}>
+              <MenuItem key="browser" onClick={handleBrowser}>
                 <Link to={`/browser`}>
                   {" "}
                   <Typography textAlign="center">Browser</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem key="login" onClick={handleCloseNavMenu}>
-                <Link to={`/login`}>
-                  {" "}
-                  <Typography textAlign="center">Login</Typography>
                 </Link>
               </MenuItem>
             </Menu>
@@ -108,64 +118,66 @@ const MainHeader = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
               key="home"
-              onClick={handleCloseNavMenu}
+              onClick={handleHome}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              <Link to={`/`}>
-                {" "}
-                <Typography textAlign="center">Home</Typography>
-              </Link>
+              <Typography textAlign="center">Home</Typography>
             </Button>
             <Button
               key="browser"
-              onClick={handleCloseNavMenu}
+              onClick={handleBrowser}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              <Link to={`/browser`}>
-                {" "}
-                <Typography textAlign="center">Browser</Typography>
-              </Link>
-            </Button>
-            <Button
-              key="login"
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <Link to={`/login`}>
-                {" "}
-                <Typography textAlign="center">Login</Typography>
-              </Link>
+              <Typography textAlign="center">Browser</Typography>
             </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            {isLogin.isAuthenticated ? (
+              <Box display="inline-flex" alignItems="center">
+                <Typography
+                  variant="body2"
+                  noWrap
+                  component="div"
+                  sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  {isLogin.user.username}
+                </Typography>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/2.jpg"
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem key="farovite" onClick={handleFavorite}>
+                    <Typography textAlign="center">Favorite Movies</Typography>
+                  </MenuItem>
+                  <MenuItem key="logout" onClick={handleLogOut}>
+                    <Typography textAlign="center">Log Out</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            ) : (
+              <Button onClick={() => navigate(`/login`)}>Log in</Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

@@ -56,7 +56,7 @@ function DataContextProvider({ children }) {
     }
   };
   useEffect(() => {
-    isSearch === true ? searchFirm() : getData();
+    isSearch ? searchFirm() : getData();
   }, [currentPage]);
 
   useEffect(() => {
