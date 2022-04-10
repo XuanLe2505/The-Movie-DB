@@ -3,6 +3,12 @@ import { useParams } from "react-router-dom";
 import tmdbApi from "../app/tmdbApi";
 import LoadingScreen from "../components/LoadingScreen";
 import MovieTrailer from "../components/MovieTrailer";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { IconButton } from "@mui/material";
+
+import useFavorite from "../hooks/useFavorite";
+import useAuth from "../hooks/useAuth";
 
 import "./MovieDetails.css";
 
@@ -10,16 +16,15 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState();
   const { movieId } = useParams();
 
+  const { isAuthenticated } = useAuth();
+  const { movieIds, addMovie, removeMovie } = useFavorite();
+
+  const isAddedInFavorite = movieIds?.includes(movieId);
+
   useEffect(() => {
     const getMoveDetails = async () => {
-      try {
-        const response = await tmdbApi.getMovieDetails(movieId);
-        setMovie(response);
-
-        console.log("response", response);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await tmdbApi.getMovieDetails(movieId);
+      setMovie(response);
     };
     getMoveDetails();
   }, []);
@@ -48,7 +53,33 @@ const MovieDetails = () => {
           </div>
 
           <div className="movie-content">
-            <h1 className="title">{movie.title || movie.name}</h1>
+            <div className="movie-title">
+              <h1 className="title" style={{ display: "inline-block" }}>
+                {movie.title || movie.name}
+              </h1>
+              {isAuthenticated ? (
+                <>
+                  {isAddedInFavorite ? (
+                    <IconButton
+                      size="large"
+                      sx={{ color: "white" }}
+                      onClick={() => removeMovie(movieId)}
+                    >
+                      <FavoriteIcon />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      size="large"
+                      sx={{ color: "white" }}
+                      onClick={() => addMovie(movieId)}
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  )}
+                </>
+              ) : null}
+            </div>
+
             <div className="genres">
               {movie.genres.map(({ name, id }) => (
                 <span

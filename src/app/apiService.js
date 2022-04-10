@@ -13,21 +13,21 @@ const apiService = axios.create({
 });
 
 apiService.interceptors.request.use((config) => {
-  console.log(config);
+  // console.log(config);
   return config;
 });
 
 apiService.interceptors.response.use(
   (response) => {
     if (response && response.data) {
-      console.log("ok.data", response.data);
+      // console.log("ok.data", response.data);
       return response.data;
     }
-    console.log("ok", response);
+    // console.log("ok", response);
     return response;
   },
   (err) => {
-    console.log(err);
+    // console.log(err);
     throw err;
   }
 );

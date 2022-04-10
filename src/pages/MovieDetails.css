@@ -45,6 +45,11 @@
   margin: 0 auto 0 auto;
 }
 
+.movie-title {
+  display: flex;
+  align-items: center;
+}
+
 .movie-poster {
   flex: 0.3;
 }
@@ -61,13 +66,12 @@
   padding-left: 2rem;
 }
 
-.strong-text {
-  font-weight: bold
-}
+
 
 .movie-content .title {
   font-size: 4rem;
   line-height: 1.6;
+  margin-right: 1rem;
 }
 
 .movie-content .overview {

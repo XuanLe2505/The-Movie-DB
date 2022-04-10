@@ -16,6 +16,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import LoginIcon from "@mui/icons-material/Login";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useAuth from "../hooks/useAuth";
+import useFavorite from "../hooks/useFavorite";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -83,6 +84,9 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const { movieIds } = useFavorite();
+  const numberOfFavoriteMovies = movieIds.length;
+
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -129,7 +133,7 @@ export default function PrimarySearchAppBar() {
           <Typography variant="span">Log in</Typography>
         </MenuItem>
       ) : (
-        <>
+        <div>
           <MenuItem divider>
             <IconButton size="medium" color="inherit">
               <AccountCircle />
@@ -138,14 +142,14 @@ export default function PrimarySearchAppBar() {
             <Typography variant="span">{user.username}</Typography>
           </MenuItem>
           <MenuItem>
-            <IconButton
-              size="medium"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
+            <IconButton size="medium" color="inherit">
+              {numberOfFavoriteMovies > 0 ? (
+                <Badge badgeContent={numberOfFavoriteMovies} color="error">
+                  <FavoriteIcon />
+                </Badge>
+              ) : (
                 <FavoriteIcon />
-              </Badge>
+              )}
             </IconButton>
             <Typography variant="span">Favorites</Typography>
           </MenuItem>
@@ -161,7 +165,7 @@ export default function PrimarySearchAppBar() {
             </IconButton>
             <Typography variant="span">Log out</Typography>
           </MenuItem>
-        </>
+        </div>
       )}
     </Menu>
   );
@@ -185,6 +189,7 @@ export default function PrimarySearchAppBar() {
                 size="small"
                 sx={{ color: "white", display: "inline-block" }}
                 onClick={() => navigate(url)}
+                key={url}
               >
                 {label}
               </Button>
@@ -228,14 +233,14 @@ export default function PrimarySearchAppBar() {
                   <AccountCircle />
                 </IconButton>
                 <Typography>{user.username}</Typography>
-                <IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
-                >
-                  <Badge badgeContent={17} color="error">
+                <IconButton size="large" color="inherit">
+                  {numberOfFavoriteMovies > 0 ? (
+                    <Badge badgeContent={numberOfFavoriteMovies} color="error">
+                      <FavoriteIcon />
+                    </Badge>
+                  ) : (
                     <FavoriteIcon />
-                  </Badge>
+                  )}
                 </IconButton>
                 <IconButton
                   size="medium"

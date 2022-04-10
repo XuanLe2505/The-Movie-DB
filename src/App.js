@@ -6,14 +6,13 @@ import BrowsePage from "./pages/BrowsePage";
 import Layout from "./layouts/Layout";
 import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
-import { CartContext } from "./contexts/CartContext";
+import { FavoriteProvider } from "./contexts/FavoriteContext";
 
 function App() {
   return (
     <div className="App">
-      <>
-        <AuthProvider>
-          {/* <CartContext> */}
+      <AuthProvider>
+        <FavoriteProvider>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<HomePages />} />
@@ -22,9 +21,8 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
             </Route>
           </Routes>
-          {/* </CartContext> */}
-        </AuthProvider>
-      </>
+        </FavoriteProvider>
+      </AuthProvider>
     </div>
   );
 }
