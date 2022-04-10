@@ -3,16 +3,17 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import LoginIcon from "@mui/icons-material/Login";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -58,16 +59,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const navBarItems = [
+  {
+    label: "Home",
+    url: "/",
+  },
+  {
+    label: "Browser",
+    url: "/browser",
+  },
+];
+
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -106,21 +112,11 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {isAuthenticated && (
-        <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            <Badge badgeContent={17} color="error">
-              <FavoriteIcon />
-            </Badge>
-          </IconButton>
-        </MenuItem>
-      )}
       {!isAuthenticated ? (
-        <MenuItem onClick={handleLogIn}>
+        <MenuItem
+          onClick={handleLogIn}
+          sx={{ display: "flex", alignItems: "center" }}
+        >
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -128,22 +124,42 @@ export default function PrimarySearchAppBar() {
             aria-haspopup="true"
             color="inherit"
           >
-            <AccountCircle />
+            <LoginIcon />
           </IconButton>
-          <p>LogIn</p>
+          <Typography variant="span">Log in</Typography>
         </MenuItem>
       ) : (
         <>
-          <AccountCircle /> {user.username}
+          <MenuItem divider>
+            <IconButton size="medium" color="inherit">
+              <AccountCircle />
+            </IconButton>
+
+            <Typography variant="span">{user.username}</Typography>
+          </MenuItem>
+          <MenuItem>
+            <IconButton
+              size="medium"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <FavoriteIcon />
+              </Badge>
+            </IconButton>
+            <Typography variant="span">Favorites</Typography>
+          </MenuItem>
           <MenuItem onClick={handleLogOut}>
             <IconButton
-              size="large"
+              size="medium"
               aria-label="account of current user"
               aria-controls="primary-search-account-menu"
               aria-haspopup="true"
               color="inherit"
-            ></IconButton>
-            <LogoutIcon /> LogOut
+            >
+              <LogoutIcon />
+            </IconButton>
+            <Typography variant="span">Log out</Typography>
           </MenuItem>
         </>
       )}
@@ -158,10 +174,23 @@ export default function PrimarySearchAppBar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" }, mr: 1 }}
           >
-            TMDB
+            Four-movies
           </Typography>
+
+          <Box sx={{ mr: 1, display: "flex", alignItems: "center" }}>
+            {navBarItems.map(({ url, label }) => (
+              <Button
+                size="small"
+                sx={{ color: "white", display: "inline-block" }}
+                onClick={() => navigate(url)}
+              >
+                {label}
+              </Button>
+            ))}
+          </Box>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -173,32 +202,41 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {isAuthenticated && (
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <FavoriteIcon />
-                </Badge>
-              </IconButton>
-            )}
             {!isAuthenticated ? (
-              <IconButton
-                size="medium"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
+              <Box
                 onClick={handleLogIn}
-                color="inherit"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
               >
-                <AccountCircle /> &nbsp; Log in
-              </IconButton>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="primary-search-account-menu"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <LoginIcon />
+                </IconButton>
+                <Typography variant="span">Log in</Typography>
+              </Box>
             ) : (
-              <>
-                <AccountCircle /> {user.username}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <IconButton size="medium" color="inherit">
+                  <AccountCircle />
+                </IconButton>
+                <Typography>{user.username}</Typography>
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="error">
+                    <FavoriteIcon />
+                  </Badge>
+                </IconButton>
                 <IconButton
                   size="medium"
                   edge="end"
@@ -208,9 +246,9 @@ export default function PrimarySearchAppBar() {
                   onClick={handleLogOut}
                   color="inherit"
                 >
-                  <LogoutIcon /> Log out
+                  <LogoutIcon />
                 </IconButton>
-              </>
+              </Box>
             )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
