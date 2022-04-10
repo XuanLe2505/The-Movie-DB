@@ -55,7 +55,7 @@ const MainHeader = () => {
     navigate(`favorite`);
   };
   return (
-    <AppBar position="static" sx={{ bgcolor: "black", color: "aliceblue" }}>
+    <AppBar position="static" sx={{ bgcolor: "#292827", color: "aliceblue" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
