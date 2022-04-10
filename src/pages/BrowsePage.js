@@ -41,7 +41,7 @@ function BrowsePage() {
   }, [currentPage]);
 
   return (
-    <Container sx={{ height: "100vh", mt: 3 }}>
+    <Container sx={{ height: "100%", mt: 3 }}>
       <Stack spacing={2}>
         <Stack>
           <FilterGenres />
@@ -61,24 +61,22 @@ function BrowsePage() {
         </Stack>
       </Stack>
 
-      <Box sx={{ position: "relative", height: 1, width: "100%" }}>
-        {loading ? (
-          <LoadingScreen />
-        ) : (
-          <>
-            {error ? (
-              <Alert severity="error">{error}</Alert>
-            ) : (
-              <MovieList
-                movies={movies}
-                setCurrentPage={setCurrentPage}
-                totalPage={totalPage}
-                currentPage={currentPage}
-              />
-            )}
-          </>
-        )}
-      </Box>
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          {error ? (
+            <Alert severity="error">{error}</Alert>
+          ) : (
+            <MovieList
+              movies={movies}
+              setCurrentPage={setCurrentPage}
+              totalPage={totalPage}
+              currentPage={currentPage}
+            />
+          )}
+        </>
+      )}
     </Container>
   );
 }

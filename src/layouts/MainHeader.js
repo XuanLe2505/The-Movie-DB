@@ -113,7 +113,7 @@ const MainHeader = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            LOGO
+            FOUR-MOVIE
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
@@ -140,6 +140,7 @@ const MainHeader = () => {
                   noWrap
                   component="div"
                   sx={{ display: { xs: "none", sm: "block" } }}
+                  mr={2}
                 >
                   {isLogin.user.username}
                 </Typography>

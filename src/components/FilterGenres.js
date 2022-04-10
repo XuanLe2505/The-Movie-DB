@@ -18,9 +18,14 @@ const FilterGenres = () => {
     getData();
   }, []);
   return (
-    <div>
+    <div className="genres">
       {genres?.map(({ name, id }) => (
-        <button key={id} value={filterInput} onClick={() => setFilterInput(id)}>
+        <button
+          key={id}
+          value={filterInput}
+          onClick={() => setFilterInput(id)}
+          className="genres-item"
+        >
           {name}
         </button>
       ))}
@@ -28,6 +33,7 @@ const FilterGenres = () => {
         key="clear-filter"
         value="clear-filter"
         onClick={() => setFilterInput("")}
+        className="genres-item"
       >
         All Genres
       </button>

@@ -82,21 +82,6 @@ const MovieDetails = () => {
                   Add To Favorite
                 </button>
               )}
-              <button
-                onClick={
-                  isLogin.isAuthenticated
-                    ? () =>
-                        setIdList({
-                          ...idList,
-                          [movie.id]: movie,
-                        })
-                    : () => navigate("/login")
-                }
-                disabled={movie.id in idList}
-                state={{ backgroundLocation: location }}
-              >
-                Add To Favorite
-              </button>
             </span>
             <div className="genres">
               {movie.genres.map(({ name, id }) => (
