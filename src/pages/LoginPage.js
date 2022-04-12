@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +9,7 @@ import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Box, display } from "@mui/system";
 
+
 const LoginSchema = yup.object().shape({
   username: yup.string().required("Username is required"),
 });
@@ -15,12 +17,15 @@ const defaultValues = {
   username: "",
 };
 
+
 function LoginPage() {
+
   const methods = useForm({
     defaultValues,
     resolver: yupResolver(LoginSchema),
   });
   const { handleSubmit } = methods;
+
 
   const auth = useAuth();
   const navigate = useNavigate();
@@ -29,10 +34,12 @@ function LoginPage() {
   const onSubmit = (data) => {
     auth.login(data.username, () => {
       navigate(-1);
+
     });
   };
 
   return (
+
     <Box
       sx={{
         display: "flex",
@@ -66,5 +73,6 @@ function LoginPage() {
     </Box>
   );
 }
+
 
 export default LoginPage;

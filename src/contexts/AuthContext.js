@@ -1,3 +1,4 @@
+
 import { createContext, useReducer } from "react";
 
 const initialState = {
@@ -10,6 +11,7 @@ const LOGOUT = "LOGOUT";
 
 const reducer = (state, action) => {
   switch (action.type) {
+
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -22,10 +24,12 @@ const reducer = (state, action) => {
         isAuthenticated: false,
         user: null,
       };
+
     default:
       return state;
   }
 };
+
 
 const AuthContext = createContext({ ...initialState });
 
@@ -55,6 +59,7 @@ function AuthProvider({ children }) {
         logout,
       }}
     >
+
       {children}
     </AuthContext.Provider>
   );

@@ -3,6 +3,7 @@ import "./App.css";
 import HomePages from "./pages/HomePages";
 import MovieDetails from "./pages/MovieDetails";
 import BrowsePage from "./pages/BrowsePage";
+
 import MainLayout from "./layouts/Layout";
 import LoginPage from "./pages/LoginPage";
 import DataContextProvider from "./contexts/DataContext";
@@ -13,6 +14,7 @@ import FavoriteContextProvider from "./contexts/FavoriteContext";
 import AuthRequire from "./contexts/AuthRequire";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
+
 
 function App() {
   const location = useLocation();
@@ -28,6 +30,7 @@ function App() {
   });
   return (
     <div className="App">
+
       <>
         <ThemeProvider theme={theme}>
           <AuthProvider>

@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import tmdbApi from "../app/tmdbApi";
 import LoadingScreen from "../components/LoadingScreen";
 import MovieTrailer from "../components/MovieTrailer";
+
 import useAuth from "../hooks/useAuth";
 import useFavorite from "../hooks/useFavorite";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+
 
 import "./MovieDetails.css";
 
@@ -19,16 +21,15 @@ const MovieDetails = () => {
   const setIdList = useFavorite().setIdList;
   const location = useLocation();
 
+  const { isAuthenticated } = useAuth();
+  const { movieIds, addMovie, removeMovie } = useFavorite();
+
+  const isAddedInFavorite = movieIds?.includes(movieId);
+
   useEffect(() => {
     const getMoveDetails = async () => {
-      try {
-        const response = await tmdbApi.getMovieDetails(movieId);
-        setMovie(response);
-
-        console.log("response", response);
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await tmdbApi.getMovieDetails(movieId);
+      setMovie(response);
     };
     getMoveDetails();
   }, []);
@@ -57,6 +58,7 @@ const MovieDetails = () => {
           </div>
 
           <div className="movie-content">
+
             <h1 className="title">{movie.title || movie.name}</h1>{" "}
             <span>
               {idList[movie.id] ? (
@@ -85,6 +87,7 @@ const MovieDetails = () => {
                 </button>
               )}
             </span>
+
             <div className="genres">
               {movie.genres.map(({ name, id }) => (
                 <span
