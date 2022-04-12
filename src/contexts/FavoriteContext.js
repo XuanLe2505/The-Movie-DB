@@ -1,3 +1,4 @@
+
 import React, { useState, createContext, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 
@@ -45,3 +46,4 @@ function FavoriteContextProvider({ children }) {
 }
 
 export default FavoriteContextProvider;
+
