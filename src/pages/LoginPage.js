@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { FormProvider, FTextField } from "../components/form";
 import { Button, Stack, Typography } from "@mui/material";
 import useAuth from "../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 
 const LoginSchema = yup.object().shape({
