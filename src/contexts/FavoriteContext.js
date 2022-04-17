@@ -1,4 +1,3 @@
-
 import React, { useState, createContext, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 
@@ -8,9 +7,6 @@ const contextdata = {
   idList: idList,
   setIdList: () => {},
 };
-
-// const searchURL =
-//   "https://api.themoviedb.org/3/search/multi?api_key=7f43d469e4b124bca9e8aa24fe508eaf";
 
 export const FavoriteContext = createContext(contextdata);
 
@@ -46,4 +42,3 @@ function FavoriteContextProvider({ children }) {
 }
 
 export default FavoriteContextProvider;
-
