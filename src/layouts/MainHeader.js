@@ -99,7 +99,7 @@ const MainHeader = () => {
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem key="browser" onClick={handleBrowser}>
-                <Typography textAlign="center">Browser</Typography>
+                <Typography textAlign="center">Browse</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -124,7 +124,7 @@ const MainHeader = () => {
               onClick={handleBrowser}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              <Typography textAlign="center">Browser</Typography>
+              <Typography textAlign="center">Browse</Typography>
             </Button>
           </Box>
 
