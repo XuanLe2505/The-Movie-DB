@@ -31,7 +31,7 @@ const MovieDetails = () => {
       }
     };
     getMoveDetails();
-  }, []);
+  }, [movieId]);
 
   if (!movie) return <LoadingScreen />;
 

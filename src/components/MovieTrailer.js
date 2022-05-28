@@ -19,7 +19,7 @@ const MovieTrailer = () => {
     };
 
     getTrailer();
-  }, []);
+  }, [movieId]);
 
   useEffect(() => {
     if (!trailer) {
